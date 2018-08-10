@@ -1,20 +1,12 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
+import bankActionCreators from "../action/bankActionCreators";
+import bankStore from "../store/bankStore";
+import { connect } from "react-redux";
 
 class Login extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {  }
-    }
-
     state = {
         redirectToReferrer: false
-    };
-    
-    login = () => {
-        fakeAuth.authenticate(() => {
-            this.setState({ redirectToReferrer: true });
-        });
     };
     
     render() { 
@@ -28,23 +20,33 @@ class Login extends Component {
         return (
         <div>
             <p>You must log in to view the page at some {from.pathname}</p>
-            <button onClick={this.login}>Log in</button>
+            <button onClick={
+                // () => {}
+                this.props.onLogin()
+            }>Log in</button>
+            {
+                // for debug only
+                bankStore.getState().isLogged === true ? <p>True</p> : <p>False</p>
+            }
         </div>
         );
     }
 }
- 
-const fakeAuth = {
-    isAuthenticated: false,
-    authenticate(cb) {
-      this.isAuthenticated = true;
-      setTimeout(cb, 100); // fake async
-    },
-    signout(cb) {
-      this.isAuthenticated = false;
-      setTimeout(cb, 100);
+
+const mapStateToProps = state => {
+    return {
+        isLogged: state.isLogged
     }
 };
 
-export default Login;
+const mapDispatchToProps = dispatch => {
+    return {
+        onLogin: () => dispatch(bankActionCreators.login())
+    }
+}
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(Login);
 

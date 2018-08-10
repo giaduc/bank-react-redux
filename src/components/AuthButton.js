@@ -12,13 +12,14 @@ const AuthButton = withRouter(
         <button
           onClick={() => {
             fakeAuth.signout(() => history.push("/"));
+            this.prop.onLogout();
           }}
         >
           Sign out
         </button>
       </p>
     ) : (
-      <p>You are not logged in. {bankStore.getState().log}</p>
+      <p>You are not logged in. {bankStore.getState().isLogged}</p>
     )
 );
 
@@ -36,7 +37,7 @@ const fakeAuth = {
 
 const mapStateToProps = state => {
   return {
-    isLogged: state.log
+    isLogged: state.isLogged
   }
 };
 
@@ -45,6 +46,7 @@ const mapDispatchToProps = dispatch => {
     onLogout: () => dispatch(bankActionCreators.logout())
   }
 }
+
 
 export default connect(
   mapStateToProps,
