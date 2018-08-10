@@ -3,6 +3,7 @@ import bankStore from "./store/bankStore";
 import BankApp from "./BankApp";
 import bankActionCreators from "./action/bankActionCreators";
 import { connect } from "react-redux";
+
 class BankAppContainer extends Component {
   render() {
     return (
@@ -21,6 +22,7 @@ class BankAppContainer extends Component {
     );
   }
 }
+
 const mapStateToProps = state => {
   return {
     balance: state.balance,
@@ -28,6 +30,7 @@ const mapStateToProps = state => {
     redirectToReferrer: state.auth.redirectToReferrer
   };
 };
+
 const mapDispatchToProps = dispatch => {
   return {
     onDeposit: amount =>

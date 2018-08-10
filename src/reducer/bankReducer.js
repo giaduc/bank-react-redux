@@ -2,17 +2,24 @@ import {
   DEPOSIT_INTO_ACCOUNT,
   WITHDRAW_FROM_ACCOUNT,
   TOGGLE_INFO,
-  AUTHENTICATION
+  AUTHENTICATION,
+  LOGIN,
+  LOGOUT
 } from "../constant/constants";
 import update from "react-addons-update";
-import { combineReducers } from "redux";
+import {
+  combineReducers
+} from "redux";
+
 const initialState = {
   initialBalance: 0,
   redirectToReferrer: true,
+  isLogged: false,
   initialUI: {
     showExchange: false
   }
 };
+
 const balanceReducer = (state = initialState.initialBalance, action) => {
   switch (action.type) {
     case DEPOSIT_INTO_ACCOUNT:
@@ -23,11 +30,25 @@ const balanceReducer = (state = initialState.initialBalance, action) => {
       return state;
   }
 };
+
+const loginReducer = (state = initialState.isLogged, action) => {
+  switch (action.type) {
+    case LOGIN:
+      return {...state, isLogged: true}
+    case LOGOUT:
+      return {...state, isLogged: false}
+    default:
+      return state;
+  }
+};
+
 const uiReducer = (state = initialState.initialUI, action) => {
   switch (action.type) {
     case TOGGLE_INFO:
       return update(state, {
-        showInfo: { $apply: currentState => !currentState }
+        showInfo: {
+          $apply: currentState => !currentState
+        }
       });
     default:
       return state;
@@ -45,9 +66,12 @@ const authenticationReducer = (
       return state;
   }
 };
+
 const bankReducer = combineReducers({
   balance: balanceReducer,
   ui: uiReducer,
-  auth: authenticationReducer
+  auth: authenticationReducer,
+  log: loginReducer
 });
+
 export default bankReducer;

@@ -1,14 +1,18 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+
 class BankApp extends Component {
+
   handleDeposit() {
     this.props.onDeposit(this.refs.amount.value);
     this.refs.amount.value = "";
   }
+
   handleWithdraw() {
     this.props.onWithdraw(this.refs.amount.value);
     this.refs.amount.value = "";
   }
+
   render() {
     return (
       <div>
@@ -47,7 +51,8 @@ class BankApp extends Component {
     );
   }
 }
-BankApp.PropTypes = {
+
+BankApp.propTypes = {
   showExchange: PropTypes.bool,
   balance: PropTypes.number,
   onDeposit: PropTypes.func,
