@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
-import bankActionCreators from "../action/bankActionCreators";
-import bankStore from "../store/bankStore";
 import { connect } from "react-redux";
+
+import bankActionCreators from "../action/bankActionCreators";
+// import bankStore from "../store/bankStore";
 
 class Login extends Component {
     state = {
@@ -12,23 +13,19 @@ class Login extends Component {
     render() { 
         const { from } = this.props.location.state || { from: { pathname: "/" } };
         const { redirectToReferrer } = this.state;
+        const { isLogged, onLogin } = this.props;
 
         if (redirectToReferrer) {
-        return <Redirect to={from} />;
+            return <Redirect to={from} />;
         }
 
         return (
-        <div>
-            <p>You must log in to view the page at some {from.pathname}</p>
-            <button onClick={
-                // () => {}
-                this.props.onLogin()
-            }>Log in</button>
-            {
-                // for debug only
-                bankStore.getState().isLogged === true ? <p>True</p> : <p>False</p>
-            }
-        </div>
+            <div>
+                {
+                    isLogged ? <p>False</p> : <p>You must log in to view the page at some {from.pathname}</p> 
+                }
+                <button onClick={() => onLogin() }>Log in</button>
+            </div>
         );
     }
 }
@@ -43,7 +40,7 @@ const mapDispatchToProps = dispatch => {
     return {
         onLogin: () => dispatch(bankActionCreators.login())
     }
-}
+};
 
 export default connect(
     mapStateToProps,

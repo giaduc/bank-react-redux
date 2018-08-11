@@ -2,7 +2,7 @@ import {
   WITHDRAW_FROM_ACCOUNT,
   DEPOSIT_INTO_ACCOUNT,
   TOGGLE_INFO,
-  AUTHENTICATION, 
+  AUTHENTICATION,
   LOGIN,
   LOGOUT
 } from "../constant/constants";
@@ -30,12 +30,12 @@ const bankActionCreators = {
       type: AUTHENTICATION
     };
   },
-  login(){
+  login() {
     return {
       type: LOGIN
     }
-  }, 
-  logout(){
+  },
+  logout() {
     return {
       type: LOGOUT
     }

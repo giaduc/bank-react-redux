@@ -6,4 +6,8 @@ const logger = store => next => action => {
 };
 
 const bankStore = createStore(bankReducer, applyMiddleware(logger));
+const unsubscribe = bankStore.subscribe(() =>
+  console.log(bankStore.getState())
+)
+
 export default bankStore;

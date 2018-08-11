@@ -31,12 +31,12 @@ const balanceReducer = (state = initialState.initialBalance, action) => {
   }
 };
 
-const loginReducer = (state = initialState.isLogged, action) => {
+const logReducer = (state = initialState.isLogged, action) => {
   switch (action.type) {
     case LOGIN:
-      return {...state, isLogged: true}
+      return state = true;
     case LOGOUT:
-      return {...state, isLogged: false}
+      return state = false;
     default:
       return state;
   }
@@ -71,7 +71,7 @@ const bankReducer = combineReducers({
   balance: balanceReducer,
   ui: uiReducer,
   auth: authenticationReducer,
-  log: loginReducer
+  isLogged: logReducer
 });
 
 export default bankReducer;

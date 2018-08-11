@@ -14,6 +14,8 @@ class BankApp extends Component {
   }
 
   render() {
+    const { balance, showExchange } = this.props;
+
     return (
       <div>
         <header>
@@ -23,7 +25,7 @@ class BankApp extends Component {
             width="150"
           />
         </header>
-        <h1>your balance is ₨{this.props.balance.toFixed(2)}</h1>
+        <h1>your balance is ₨{balance.toFixed(2)}</h1>
         <div className="atm">
           <input type="text" placeholder="enter amount" ref="amount" />
           <button onClick={this.handleWithdraw.bind(this)}> Withdraw </button>
@@ -34,7 +36,7 @@ class BankApp extends Component {
           <strong>Exchange Rates:</strong>
           <div
             className={
-              this.props.showExchange ? "exchange--visible" : "exchange--closed"
+              showExchange ? "exchange--visible" : "exchange--closed"
             }
           >
             {/* {console.log(
