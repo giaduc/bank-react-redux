@@ -1,8 +1,10 @@
 import React, { Component } from "react";
-import bankStore from "./store/bankStore";
-import BankApp from "./BankApp";
-import bankActionCreators from "./action/bankActionCreators";
 import { connect } from "react-redux";
+
+import bankStore from "../store/bankStore";
+import bankActionCreators from "../action/bankActionCreators";
+
+import BankApp from "./BankApp";
 
 class BankAppContainer extends Component {
   render() {

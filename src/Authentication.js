@@ -1,12 +1,11 @@
-import BankAppContainer from "./BankAppContainer";
 import React from "react";
 import {
   BrowserRouter as Router,
   Route,
   Link
 } from "react-router-dom";
-import PropTypes from "prop-types";
 
+import BankAppContainer from "./container/BankAppContainer";
 import Login from './container/Login';
 import AuthButton from './components/AuthButton';
 import PrivateRoute from './components/PrivateRoute';
@@ -40,29 +39,5 @@ const Authentication = () => (
     </React.Fragment>
   </Router>
 );
-
-
-
-// const AuthButton = withRouter(
-//   ({ history }) =>
-//     fakeAuth.isAuthenticated ? (
-//       <p>
-//         Welcome!{" "}
-//         <button
-//           onClick={() => {
-//             fakeAuth.signout(() => history.push("/"));
-//           }}
-//         >
-//           Sign out
-//         </button>
-//       </p>
-//     ) : (
-//       <p>You are not logged in.</p>
-//     )
-// );
-
-Authentication.propTypes = {
-  onAuthentication: PropTypes.func
-};
 
 export default Authentication;
