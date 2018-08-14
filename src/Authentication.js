@@ -6,9 +6,9 @@ import {
 } from "react-router-dom";
 import { connect } from 'react-redux';
 
-import BankAppContainer from "./container/BankAppContainer";
+import BankApp from "./container/BankApp";
 import Login from './container/Login';
-import AuthButton from './components/AuthButton';
+import Logout from './container/Logout';
 import PrivateRoute from './components/PrivateRoute';
 import Public from './components/Public';
 
@@ -18,7 +18,7 @@ class Authentication extends Component {
     return (  
       <Router>
         <React.Fragment>
-          <AuthButton />
+          <Logout />
           <ul>
             <li>
               <Link to="/public">Public Page</Link>
@@ -33,7 +33,7 @@ class Authentication extends Component {
           <PrivateRoute
             path="/protected"
             isLogged={isLogged}
-            component={() => <BankAppContainer />}
+            component={() => <BankApp />}
           />
         </React.Fragment>
       </Router>

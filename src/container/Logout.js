@@ -2,17 +2,17 @@ import React, { Component } from 'react';
 import { connect } from "react-redux";
 import bankActionCreators from "../action/bankActionCreators";
 
-class AuthButton extends Component {
+import Message from '../components/Message';
+import Button from '../components/Button';
+
+class Logout extends Component {
   render() { 
     const { isLogged, onLogout } = this.props;
-    const message = <p>You are not logged in.</p>;
-    const logoutButton = <button onClick={ () => onLogout() }>Sign out</button>;
+    const message = "You are not logged in";
 
     return (  
       <div>
-        {
-          isLogged ? logoutButton : message
-        }
+        {isLogged ? <Button onClick={ onLogout } title="Sign out" /> : <Message message={message}/>}
       </div>
     );
   }
@@ -33,4 +33,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(AuthButton);
+)(Logout);
