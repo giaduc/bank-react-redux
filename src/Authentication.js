@@ -18,7 +18,7 @@ class Authentication extends Component {
     return (  
       <Router>
         <React.Fragment>
-          {/* <AuthButton /> */}
+          <AuthButton />
           <ul>
             <li>
               <Link to="/public">Public Page</Link>

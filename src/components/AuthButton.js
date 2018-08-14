@@ -1,39 +1,22 @@
-import React from 'react';
-import { withRouter } from 'react-router-dom';
+import React, { Component } from 'react';
 import { connect } from "react-redux";
 import bankActionCreators from "../action/bankActionCreators";
-import bankStore from "../store/bankStore";
 
-const AuthButton = withRouter(
-  ({ history }) =>
-    fakeAuth.isAuthenticated ? (
-      <p>
-        Welcome!{" "}
-        <button
-          onClick={() => {
-            fakeAuth.signout(() => history.push("/"));
-            this.prop.onLogout();
-          }}
-        >
-          Sign out
-        </button>
-      </p>
-    ) : (
-      <p>You are not logged in. {bankStore.getState().isLogged}</p>
-    )
-);
+class AuthButton extends Component {
+  render() { 
+    const { isLogged, onLogout } = this.props;
+    const message = <p>You are not logged in.</p>;
+    const logoutButton = <button onClick={ () => onLogout() }>Sign out</button>;
 
-const fakeAuth = {
-    isAuthenticated: false,
-    authenticate(cb) {
-        this.isAuthenticated = true;
-        setTimeout(cb, 100); // fake async
-    },
-    signout(cb) {
-        this.isAuthenticated = false;
-        setTimeout(cb, 100);
-    }
-};
+    return (  
+      <div>
+        {
+          isLogged ? logoutButton : message
+        }
+      </div>
+    );
+  }
+}
 
 const mapStateToProps = state => {
   return {
@@ -46,7 +29,6 @@ const mapDispatchToProps = dispatch => {
     onLogout: () => dispatch(bankActionCreators.logout())
   }
 }
-
 
 export default connect(
   mapStateToProps,
