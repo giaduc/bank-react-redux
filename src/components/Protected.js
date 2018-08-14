@@ -1,8 +1,8 @@
 import React from 'react';
 
-const Protected = () => {
+const Protected = (props) => {
     return ( 
-        <h3>Protected</h3>
+        <p>You must log in to view the page at some {props.pathname}</p> 
     );
 }
  

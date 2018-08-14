@@ -1,4 +1,7 @@
-import { createStore, applyMiddleware } from "redux";
+import {
+  createStore,
+  applyMiddleware
+} from "redux";
 import bankReducer from "../reducer/bankReducer";
 const logger = store => next => action => {
   console.log("dispatching an action", action);
@@ -6,7 +9,7 @@ const logger = store => next => action => {
 };
 
 const bankStore = createStore(bankReducer, applyMiddleware(logger));
-const unsubscribe = bankStore.subscribe(() =>
+bankStore.subscribe(() =>
   console.log(bankStore.getState())
 )
 

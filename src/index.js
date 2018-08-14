@@ -5,11 +5,12 @@ import Authentication from "./Authentication";
 import registerServiceWorker from "./registerServiceWorker";
 import bankStore from "./store/bankStore";
 import { Provider } from "react-redux";
-const store = bankStore;
+
 ReactDOM.render(
-  <Provider store={store}>
+  <Provider store={bankStore}>
     <Authentication />
   </Provider>,
   document.getElementById("root")
 );
+
 registerServiceWorker();

@@ -3,26 +3,22 @@ import { Redirect } from 'react-router-dom';
 import { connect } from "react-redux";
 
 import bankActionCreators from "../action/bankActionCreators";
-// import bankStore from "../store/bankStore";
+
+import Protected from '../components/Protected';
 
 class Login extends Component {
-    state = {
-        redirectToReferrer: false
-    };
-    
     render() { 
         const { from } = this.props.location.state || { from: { pathname: "/" } };
-        const { redirectToReferrer } = this.state;
         const { isLogged, onLogin } = this.props;
 
-        if (redirectToReferrer) {
+        if (isLogged) {
             return <Redirect to={from} />;
         }
 
         return (
             <div>
                 {
-                    isLogged ? <p>False</p> : <p>You must log in to view the page at some {from.pathname}</p> 
+                    isLogged ? <p>You are logged in.</p> : <Protected pathname={from.pathname}/>
                 }
                 <button onClick={() => onLogin() }>Log in</button>
             </div>

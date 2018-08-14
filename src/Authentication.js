@@ -1,43 +1,52 @@
-import React from "react";
+import React, { Component } from "react";
 import {
   BrowserRouter as Router,
   Route,
   Link
 } from "react-router-dom";
+import { connect } from 'react-redux';
 
 import BankAppContainer from "./container/BankAppContainer";
 import Login from './container/Login';
 import AuthButton from './components/AuthButton';
 import PrivateRoute from './components/PrivateRoute';
 import Public from './components/Public';
-// import Protected from './components/Protected';
 
-////////////////////////////////////////////////////////////
-// 1. Click the public page
-// 2. Click the protected page
-// 3. Log in
-// 4. Click the back button, note the URL each time
+class Authentication extends Component {
+  render() { 
+    const { isLogged } = this.props;
+    return (  
+      <Router>
+        <React.Fragment>
+          {/* <AuthButton /> */}
+          <ul>
+            <li>
+              <Link to="/public">Public Page</Link>
+            </li>
+            <li>
+              <Link to="/protected">Protected Page</Link>
+            </li>
+          </ul>
+          <Route path="/public" component={Public} />
 
-const Authentication = () => (
-  <Router>
-    <React.Fragment>
-      <AuthButton />
-      <ul>
-        <li>
-          <Link to="/public">Public Page</Link>
-        </li>
-        <li>
-          <Link to="/protected">Protected Page</Link>
-        </li>
-      </ul>
-      <Route path="/public" component={Public} />
-      <Route path="/login" component={Login} />
-      <PrivateRoute
-        path="/protected"
-        component={render => <BankAppContainer />}
-      />
-    </React.Fragment>
-  </Router>
-);
+          <Route path="/login" component={Login} />
+          <PrivateRoute
+            path="/protected"
+            isLogged={isLogged}
+            component={() => <BankAppContainer />}
+          />
+        </React.Fragment>
+      </Router>
+    );
+  }
+}
 
-export default Authentication;
+const mapStateToProps = state => {
+  return {
+      isLogged: state.isLogged
+  }
+};
+
+export default connect(
+  mapStateToProps
+)(Authentication);
