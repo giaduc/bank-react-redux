@@ -21,11 +21,12 @@ const initialState = {
 };
 
 const balanceReducer = (state = initialState.initialBalance, action) => {
-  switch (action.type) {
+  const {type, amount} = action;
+  switch (type) {
     case DEPOSIT_INTO_ACCOUNT:
-      return state + parseFloat(action.amount);
+      return state + amount;
     case WITHDRAW_FROM_ACCOUNT:
-      return state - parseFloat(action.amount);
+      return state - amount;
     default:
       return state;
   }

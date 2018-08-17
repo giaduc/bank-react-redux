@@ -13,15 +13,32 @@ class BankAppContainer extends Component {
   }
 
   handleDeposit() {
-    // TODO NaN handle
-    this.props.onDeposit(this.refs.amount.value);
-    this.refs.amount.value = "";
+    const amountRef = this.refs.amountRef;
+    const amount = Number.parseFloat(amountRef.value);
+
+    // must be a number and greater than 100
+    if (isNaN(amount) || amount < 100) {
+      // TODO put alert here
+      return;
+    } 
+     
+    this.props.onDeposit(amount);
+    amountRef.value = "";
   }
 
   handleWithdraw() {
-    // TODO NaN handle
-    this.props.onWithdraw(this.refs.amount.value);
-    this.refs.amount.value = "";
+    const amountRef = this.refs.amountRef;
+    const amount = Number.parseFloat(amountRef.value);
+
+    if (isNaN(amount) || amount < 0) {
+      // TODO put alert here
+      return;
+    } 
+
+    // TODO if amount > balance => cancel
+     
+    this.props.onWithdraw(amount);
+    amountRef.value = "";
   }
 
   render() {
@@ -36,9 +53,9 @@ class BankAppContainer extends Component {
             width="150"
           />
         </header>
-        <h1>your balance is ₨{balance.toFixed(2)}</h1>
+        <h1>your balance is ₨ {balance}</h1>
         <div className="atm">
-          <input type="text" placeholder="enter amount" ref="amount" />
+          <input type="text" placeholder="enter amount" ref="amountRef" />
           <Button onClick={this.handleWithdraw} title="Withdraw"/>
           <Button onClick={this.handleDeposit} title="Deposite"/>
         </div>
